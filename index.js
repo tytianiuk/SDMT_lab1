@@ -2,6 +2,7 @@
 
 const { readFile, writeFile } = require('./fileSystem.js')
 const { checkingArgs } = require('./check.js')
+const { convert } = require('./converter.js')
 
 const main = () => {
     const args = process.argv.slice(2)
@@ -12,11 +13,12 @@ const main = () => {
     checkingArgs(inputFilePath, outputFlagIndex, outputFilePath)
 
     const data = readFile(inputFilePath)
+    const html = convert(data)
 
     if (outputFilePath) {
-        writeFile(outputFilePath, data)
+        writeFile(outputFilePath, html)
     } else {
-        console.log(data)
+        console.log(html)
     }
 }
 
