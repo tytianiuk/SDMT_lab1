@@ -10,17 +10,17 @@ const regExpes = [
         length: 3,
     },
     {
-        regExp: /\*\*(?=\S).+?(?<=\S)\*\*/u,
+        regExp: /\*\*(?=\S).+?(?<=\S)\*\*(?=\s|$)/u,
         tags: ['<b>', '</b>'],
         length: 2,
     },
     {
-        regExp: /_(?=\S).+?(?<=\S)_/u,
+        regExp: /_(?=\S).+?(?<=\S)_(?=\s|$)/u,
         tags: ['<i>', '</i>'],
         length: 1,
     },
     {
-        regExp: /`(?=\S)(?!`).+?(?<=\S)`/u,
+        regExp: /`(?=\S)(?!`).+?(?<=\S)`(?=\s|$)/u,
         tags: ['<tt>', '</tt>'],
         length: 1,
     },
