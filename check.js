@@ -23,7 +23,6 @@ const checkingRegExpes = (regExpesErr, text) => {
   for (const regExpErr of regExpesErr) {
       if (text.match(regExpErr) !== null) {
           console.log(STRINGS.errRegExp)
-          console.log(regExpErr)
           process.exit(1)
       }
   }
