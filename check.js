@@ -19,4 +19,14 @@ const checkingArgs = (inputFilePath, outputFlagIndex, outputFilePath) => {
     }
 }
 
-module.exports = { checkingArgs }
+const checkingRegExpes = (regExpesErr, text) => {
+  for (const regExpErr of regExpesErr) {
+      if (text.match(regExpErr) !== null) {
+          console.log(STRINGS.errRegExp)
+          console.log(regExpErr)
+          process.exit(1)
+      }
+  }
+}
+
+module.exports = { checkingArgs, checkingRegExpes }

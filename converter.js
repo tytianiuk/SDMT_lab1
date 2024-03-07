@@ -1,8 +1,10 @@
 'use strict'
 
+const { checkingRegExpes } = require('./check')
+
 const regExpes = [
     {
-        regExp: /```(?=\r?\n)([\s\S]+?)(?<=\r?\n)```(?=\r?\n)/u,
+        regExp: /```(?=\r?\n)([\s\S]+?)(?<=\r?\n)```(?=\r?\n|$)/u,
         tags: ['<pre>', '</pre>'],
         symbol: '------',
         length: 3,
@@ -18,10 +20,22 @@ const regExpes = [
         length: 1,
     },
     {
-        regExp: /`(?=\S).+?(?<=\S)`/u,
+        regExp: /`(?=\S)(?!`).+?(?<=\S)`/u,
         tags: ['<tt>', '</tt>'],
         length: 1,
     },
+]
+
+const regExpesErr = [
+    /(^|\s)\*\*([\w\u0400-\u04FF])+/u,
+    /(^|\s)_([\w\u0400-\u04FF])+/u,
+    /(^|\s)`([\w\u0400-\u04FF])+/u,
+    /(^|\s|)```([\w\u0400-\u04FF])+/u,
+    /(^|\s|)```(?=\r?\n|$|\s)/u,
+    /\*\*[_|`]/,
+    /[_|`]\*\*/,
+    /_`/,
+    /`_/,
 ]
 
 const preData = []
@@ -48,6 +62,8 @@ const convert = (markdownText) => {
             markdownText = markdownText.replace(regExp.regExp, formatedPart)
         }
     }
+
+    checkingRegExpes(regExpesErr, markdownText)
     return addParagraphs(addPre(markdownText, '------'))
 }
 
