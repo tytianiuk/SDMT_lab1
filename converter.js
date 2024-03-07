@@ -38,18 +38,6 @@ const regExpesErr = [
     /`_/,
 ]
 
-const regExpesNesting = [
-    /<i>(<\/?(tt|b)>(.*?))<\/i>/,
-    /<i>((.*?)<\/?(b|tt)>)<\/i>/,
-    /<i>((.*?)<\/?(b|tt)>(.*?))<\/i>/,
-    /<b>(<\/?(i|tt)>(.*?))<\/b>/,
-    /<b>((.*?)<\/?(i|tt)>)<\/b>/,
-    /<b>((.*?)<\/?(i|tt)>(.*?))<\/b>/,
-    /<tt>(<\/?(i|b)>(.*?))<\/tt>/,
-    /<tt>((.*?)<\/?(i|b)>)<\/tt>/,
-    /<tt>((.*?)<\/?(i|b)>(.*?))<\/tt>/,
-]
-
 const preData = []
 
 const convert = (markdownText) => {
@@ -76,7 +64,6 @@ const convert = (markdownText) => {
     }
 
     checkingRegExpes(regExpesErr, markdownText)
-    checkingRegExpes(regExpesNesting, markdownText)
     return addParagraphs(addPre(markdownText, '------'))
 }
 
